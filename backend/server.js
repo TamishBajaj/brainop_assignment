@@ -7,6 +7,8 @@ const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
 const authRoutes = require('./routes/authRoutes');
 const { limiter } = require('./middleware/rateLimiter');
+const notFound=require('./middleware/not-found')
+const errorHandlerMiddleware=require('./middleware/error-handler')
 
 const app = express();
 
@@ -22,6 +24,8 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/posts', postRoutes);
 app.use('/api/v1/auth', authRoutes);
 
+app.use(notFound)
+app.use(errorHandlerMiddleware)
 
 
 // app.use(cors({
